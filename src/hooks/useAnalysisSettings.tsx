@@ -1,12 +1,17 @@
-import { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react';
-import resultRock from '../mock.json';
-
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { io } from 'socket.io-client';
+import mock from "../mock.json"
 interface DbConfig {
   projectId: string;
   datasetId: string;
   tableId: string;
   gcpServiceKey: string;
-  url: string;
+  schema: string;
+
+  host: string;
+  database: string;
+  user: string;
+  password: string;
 }
 
 interface HandleLineLimitChangeProps {
@@ -103,21 +108,23 @@ export interface Metadata {
 }
 
 const AnalysisSettingsContext = createContext<AnalysisSettingsContextProps | undefined>(undefined);
+const ws = io('http://localhost:5000');
 
 export function AnalysisSettingsProvider({ children }: { children?: ReactNode }) {
   const [lineLimit, setLineLimit] = useState(100);
   const [dbType, setDbType] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState(resultRock);
+  const [result, setResult] = useState(mock);
   const [dbConfig, setDbConfig] = useState<DbConfig>({
     projectId: '',
     datasetId: '',
     tableId: '',
     gcpServiceKey: '',
-    url: '',
+    host: '',
+    database: '',
+    user: '',
+    password: '',
   });
-
-  const wsRef = useRef<WebSocket | null>(null);
 
   const handleLineLimitChange = ({ increment, override }: HandleLineLimitChangeProps) => {
     setLineLimit((prev) => {
@@ -141,53 +148,45 @@ export function AnalysisSettingsProvider({ children }: { children?: ReactNode })
 
   const handleAnalysisStart = async () => {
     setIsLoading(true);
-    if (wsRef.current?.readyState === WebSocket.OPEN) {
-      wsRef.current.send(JSON.stringify({ type: 'start_analysis', params: { lineLimit, dbConfig } }));
+    if (ws) {
+      ws.emit('analyze_table', {
+        'host': dbConfig.host,
+        'database': dbConfig.database,
+        'user': dbConfig.user,
+        'password': dbConfig.password,
+        'schema': dbConfig.schema,
+        'table': dbConfig.tableId,
+        'sample_size': lineLimit,
+      });
     }
   };
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:3001'); // seu servidor WS
-    wsRef.current = ws;
+    ws.on('analysis_complete', (message) => {
+      const messageParsed = JSON.parse(message);
+      console.log(messageParsed);
+    });
 
-    ws.onopen = () => console.log('✅ WebSocket conectado');
-    ws.onclose = () => console.log('❌ WebSocket desconectado');
+    ws.on('analysis_error', (message) => {
+      const messageParsed = JSON.parse(message);
+      console.log(messageParsed);
+    });
 
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
+    ws.on('analysis_result', (message) => {
+      const messageParsed = JSON.parse(message);
+      console.log(messageParsed);
+    });
 
-      switch (data.type) {
-        case 'progress':
-          console.log('📊 Progresso:', data.value);
-          break;
-
-        case 'partial_result':
-          console.log('📄 Resultado parcial:', data.payload);
-          setResult((prev) => ({
-            ...prev,
-            data: {
-              ...prev.data,
-              columns_analysis: [
-                ...prev.data.columns_analysis,
-                ...data.payload,
-              ],
-            },
-          }));
-          break;
-
-        case 'done':
-          console.log('✅ Análise concluída:', data.payload);
-          setResult(data.payload);
-          setIsLoading(false);
-          break;
-
-        default:
-          console.warn('⚠️ Evento desconhecido:', data);
-      }
-    };
+    ws.on('analysis_progress', (message) => {
+      const messageParsed = JSON.parse(message);
+      console.log(messageParsed);
+    });
 
     return () => {
-      ws.close();
+      ws.off('analysis_complete');
+      ws.off('analysis_error');
+      ws.off('analysis_result');
+      ws.off('analysis_progress');
     };
   }, []);
 
@@ -218,3 +217,4 @@ export function useAnalysisSettings() {
   }
   return context;
 }
+
