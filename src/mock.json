@@ -1,0 +1,221 @@
+{
+  "status": "success",
+  "data": {
+    "table_info": {
+      "schema": "wrong_benchmark",
+      "table": "order_items",
+      "total_columns": 6,
+      "analyzed_columns": 6
+    },
+    "sample_info": {
+      "total_rows": 10000,
+      "analyzed_rows": 10000
+    },
+    "columns_analysis": [
+      {
+        "confidence": 1.0,
+        "confidence_ml": 1.0,
+        "confidence_gen": 1.0,
+        "predicted_type": "STRING",
+        "issues": [],
+        "concordance": true,
+        "samples": 10000,
+        "confidence_details": {
+          "heuristic_rules": {
+            "confidence": 1.0,
+            "method": "Regras Heur\u00edsticas",
+            "description": "An\u00e1lise baseada em padr\u00f5es e regras pr\u00e9-definidas"
+          },
+          "machine_learning": {
+            "confidence": 1.0,
+            "method": "Modelo de Machine Learning",
+            "description": "An\u00e1lise usando modelo treinado (ferres_datatype_model)",
+            "model_version": "1.0.0"
+          },
+          "generative_ai": {
+            "confidence": 1.0,
+            "method": "IA Generativa",
+            "description": "An\u00e1lise usando intelig\u00eancia artificial generativa",
+            "model_type": "LLM-based classifier"
+          }
+        },
+        "column_name": "order_item_id",
+        "expected_type": "text"
+      },
+      {
+        "confidence": 1.0,
+        "confidence_ml": 1.0,
+        "confidence_gen": 1.0,
+        "predicted_type": "STRING",
+        "issues": [],
+        "concordance": true,
+        "samples": 10000,
+        "confidence_details": {
+          "heuristic_rules": {
+            "confidence": 1.0,
+            "method": "Regras Heur\u00edsticas",
+            "description": "An\u00e1lise baseada em padr\u00f5es e regras pr\u00e9-definidas"
+          },
+          "machine_learning": {
+            "confidence": 1.0,
+            "method": "Modelo de Machine Learning",
+            "description": "An\u00e1lise usando modelo treinado (ferres_datatype_model)",
+            "model_version": "1.0.0"
+          },
+          "generative_ai": {
+            "confidence": 1.0,
+            "method": "IA Generativa",
+            "description": "An\u00e1lise usando intelig\u00eancia artificial generativa",
+            "model_type": "LLM-based classifier"
+          }
+        },
+        "column_name": "order_id",
+        "expected_type": "text"
+      },
+      {
+        "confidence": 1.0,
+        "confidence_ml": 1.0,
+        "confidence_gen": 1.0,
+        "predicted_type": "STRING",
+        "issues": [],
+        "concordance": true,
+        "samples": 10000,
+        "confidence_details": {
+          "heuristic_rules": {
+            "confidence": 1.0,
+            "method": "Regras Heur\u00edsticas",
+            "description": "An\u00e1lise baseada em padr\u00f5es e regras pr\u00e9-definidas"
+          },
+          "machine_learning": {
+            "confidence": 1.0,
+            "method": "Modelo de Machine Learning",
+            "description": "An\u00e1lise usando modelo treinado (ferres_datatype_model)",
+            "model_version": "1.0.0"
+          },
+          "generative_ai": {
+            "confidence": 1.0,
+            "method": "IA Generativa",
+            "description": "An\u00e1lise usando intelig\u00eancia artificial generativa",
+            "model_type": "LLM-based classifier"
+          }
+        },
+        "column_name": "product_id",
+        "expected_type": "text"
+      },
+      {
+        "confidence": 0.8076000000000001,
+        "confidence_ml": 0.8076000000000001,
+        "confidence_gen": 0.7876000000000001,
+        "predicted_type": "INTEGER",
+        "issues": [
+          "Tipo detectado (INTEGER) n\u00e3o corresponde ao esperado (text)"
+        ],
+        "concordance": false,
+        "samples": 10000,
+        "confidence_details": {
+          "heuristic_rules": {
+            "confidence": 0.7576,
+            "method": "Regras Heur\u00edsticas",
+            "description": "An\u00e1lise baseada em padr\u00f5es e regras pr\u00e9-definidas"
+          },
+          "machine_learning": {
+            "confidence": 0.8076000000000001,
+            "method": "Modelo de Machine Learning",
+            "description": "An\u00e1lise usando modelo treinado (ferres_datatype_model)",
+            "model_version": "1.0.0"
+          },
+          "generative_ai": {
+            "confidence": 0.7876000000000001,
+            "method": "IA Generativa",
+            "description": "An\u00e1lise usando intelig\u00eancia artificial generativa",
+            "model_type": "LLM-based classifier"
+          }
+        },
+        "column_name": "quantity",
+        "expected_type": "text"
+      },
+      {
+        "confidence": 0.9229,
+        "confidence_ml": 0.9229,
+        "confidence_gen": 0.9029,
+        "predicted_type": "INTEGER",
+        "issues": [
+          "Tipo detectado (INTEGER) n\u00e3o corresponde ao esperado (text)"
+        ],
+        "concordance": false,
+        "samples": 10000,
+        "confidence_details": {
+          "heuristic_rules": {
+            "confidence": 0.8729,
+            "method": "Regras Heur\u00edsticas",
+            "description": "An\u00e1lise baseada em padr\u00f5es e regras pr\u00e9-definidas"
+          },
+          "machine_learning": {
+            "confidence": 0.9229,
+            "method": "Modelo de Machine Learning",
+            "description": "An\u00e1lise usando modelo treinado (ferres_datatype_model)",
+            "model_version": "1.0.0"
+          },
+          "generative_ai": {
+            "confidence": 0.9029,
+            "method": "IA Generativa",
+            "description": "An\u00e1lise usando intelig\u00eancia artificial generativa",
+            "model_type": "LLM-based classifier"
+          }
+        },
+        "column_name": "unit_price_cents",
+        "expected_type": "text"
+      },
+      {
+        "confidence": 0.5524,
+        "confidence_ml": 0.5524,
+        "confidence_gen": 0.5324,
+        "predicted_type": "STRING",
+        "issues": [],
+        "concordance": true,
+        "samples": 10000,
+        "confidence_details": {
+          "heuristic_rules": {
+            "confidence": 0.5024,
+            "method": "Regras Heur\u00edsticas",
+            "description": "An\u00e1lise baseada em padr\u00f5es e regras pr\u00e9-definidas"
+          },
+          "machine_learning": {
+            "confidence": 0.5524,
+            "method": "Modelo de Machine Learning",
+            "description": "An\u00e1lise usando modelo treinado (ferres_datatype_model)",
+            "model_version": "1.0.0"
+          },
+          "generative_ai": {
+            "confidence": 0.5324,
+            "method": "IA Generativa",
+            "description": "An\u00e1lise usando intelig\u00eancia artificial generativa",
+            "model_type": "LLM-based classifier"
+          }
+        },
+        "column_name": "discount_pct",
+        "expected_type": "text"
+      }
+    ],
+    "summary": {
+      "total_columns": 6,
+      "concordant_columns": 4,
+      "concordance_rate": 66.66666666666666,
+      "confidence_distribution": {
+        "high": 3,
+        "medium": 2,
+        "low": 1
+      },
+      "issues_found": 2
+    }
+  },
+  "metadata": {
+    "analyzed_at": "2025-08-30T22:36:57.216078",
+    "client_id": "CdJ3-O1wJwix5THEAAAB",
+    "parameters": {
+      "schema": "wrong_benchmark",
+      "table": "order_items",
+      "sample_size": 10000
+    }
+  }
+}
